@@ -26,10 +26,6 @@ public class Autor implements Serializable{
 	 
 	private String instituicao;
 
-	@ManyToOne 	
-	@JoinColumn(name="id_publicacao")
-	private Publicacao publicacao;
-
 	public Autor() {
 		// TODO Auto-generated constructor stub
 	}
@@ -63,13 +59,6 @@ public class Autor implements Serializable{
 		return id;
 	}
 
-	public Publicacao getPublicacao() {
-		return publicacao;
-	}
-
-	public void setPublicacao(Publicacao publicacao) {
-		this.publicacao = publicacao;
-	}
 	
 }
  

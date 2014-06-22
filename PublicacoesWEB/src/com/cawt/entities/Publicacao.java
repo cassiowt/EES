@@ -43,7 +43,7 @@ public class Publicacao implements Serializable {
 
 	private String localPublicacao;
 	
-	@OneToMany	(mappedBy="publicacao", cascade={CascadeType.PERSIST}, fetch=FetchType.EAGER)  
+	@OneToOne	(mappedBy="publicacao", cascade={CascadeType.PERSIST}, fetch=FetchType.EAGER)  
 	private List<Autor> autores;
 
 	@Enumerated(EnumType.STRING)
