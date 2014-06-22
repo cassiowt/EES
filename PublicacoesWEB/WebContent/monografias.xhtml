@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>CAWT - Gerenciamento de Publicações</title>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+
+		<p:panelGrid columns="6">
+			<f:facet name="header">  
+                Cadastrar nova Publicação
+             </f:facet>
+
+			<h:outputText value="Titulo: " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.titulo}" />
+
+			<h:outputText value="Sub Titulo " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.subtitulo}" />
+
+			<h:outputText value="Autor: " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.autores}" />
+
+			<h:outputText value="Local: " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.localPublicacao}" />
+
+			<h:outputText value="Data" />
+        	<p:calendar id="button" value="#{gerenciamentoMonografiasMB.monografia.data}" showOn="button" />
+
+			<h:outputText value="Descrição: " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.descricaoFisica}" />
+
+			<h:outputText value="Dimensão " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.dimensao}" />
+
+			<h:outputText value="Edição " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.edicao}" />
+
+			<h:outputText value="Editora " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.editora}" />				
+
+			<h:outputText value="Ilustração " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.ilustracao}" />				
+
+			<h:outputText value="ISBN " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.isbn}" />	
+
+			<h:outputText value="Notas Especiais " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.notasEspeciais}" />								
+		
+			<h:outputText value="Paper " />
+		 	<p:selectOneMenu value="#{gerenciamentoMonografiasMB.monografia.paper}">  
+                <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="Mínimo" itemValue="SHORT" />
+                <f:selectItem itemLabel="Completo" itemValue="FULL" />
+            </p:selectOneMenu>
+			
+			<h:outputText value="Serie " />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.serie}" />	
+
+			<h:outputText value="Tipo de Monografia " />
+			<p:selectOneMenu value="#{gerenciamentoMonografiasMB.monografia.tiposMonografias}">  
+			 <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="DISSERTAÇÕES" itemValue="DISSERTAÇÕES" />
+                <f:selectItem itemLabel="TESES" itemValue="TESES" />	
+                <f:selectItem itemLabel="FOLHETOS" itemValue="FOLHETOS" />	
+                <f:selectItem itemLabel="SEPARATAS" itemValue="SEPARATAS" />	
+                <f:selectItem itemLabel="LIVROS" itemValue="LIVROS" />
+             </p:selectOneMenu>   
+            
+		</p:panelGrid>
+		
+		<p:commandButton value="Cadastrar!"
+				action="#{gerenciamentoMonografiasMB.cadastrar}"
+				update=":form:tabelaPub :form:messages" />
+		
+		<p:growl id="messages" />
+
+		<p:dataTable editable="true" id="tabelaPub"
+			value="#{gerenciamentoMonografiasMB.monografias}" var="pub">
+			<p:ajax event="rowEdit" listener="#{gerenciamentoMonografiasMB.onEdit}"
+				update=":form:tabelaPub :form:messages" />
+
+			<p:column headerText="ID" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.id}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.id}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Titulo" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.titulo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.titulo}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="SubTitulo" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.subtitulo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.subtitulo}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Autor" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.autores}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.autores}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Local" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.localPublicacao}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.localPublicacao}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+						
+			<p:column headerText="Data" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.data}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.data}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Descrição" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.descricaoFisica}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.descricaoFisica}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			
+			<p:column headerText="Dimensão" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.dimensao}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.dimensao}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>			
+			
+			<p:column headerText="Edição" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.edicao}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.edicao}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>				
+			
+			<p:column headerText="Editora" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.editora}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.editora}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>	
+						
+			<p:column headerText="Ilustração" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.ilustracao}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.ilustracao}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>				
+			
+			<p:column headerText="ISBN" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.isbn}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.isbn}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>		
+			
+			<p:column headerText="Notas Especiais" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.notasEspeciais}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.notasEspeciais}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>		
+			
+			<p:column headerText="Paper" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.paper}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.paper}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>	
+			
+			<p:column headerText="Serie" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.serie}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.serie}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>	
+			
+			<p:column headerText="Tipo Monografia" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.tiposMonografias}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.tiposMonografias}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>	
+
+			<p:column>
+				<p:commandButton icon="ui-icon-close"
+					update=":form:tabelaPub :form:messages"
+					action="#{gerenciamentoMonografiasMB.excluir}">
+					<f:setPropertyActionListener
+						target="#{gerenciamentoMonografiasMB.monografia}" value="#{monografia}" />
+				</p:commandButton>
+			</p:column>
+
+			<p:column style="width:5%">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+
+		<br />
+		<br />
+
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>CAWT - Gerenciamento de Publicações</title>
+</h:head>
+
+<h:body>
+	<h:form id="form">
+
+		<p:panelGrid columns="2">
+			<f:facet name="header">  
+                Cadastrar nova Publcação
+             </f:facet>
+
+			<h:outputText value="Titulo: " />
+			<p:inputText value="#{gerenciamentoPublicacoesMB.publicacao.titulo}" />
+			<h:outputText value="Sub Titulo " />
+			<p:inputText value="#{gerenciamentoPublicacoesMB.publicacao.subtitulo}" />
+			<h:outputText value="Autor: " />
+			<p:inputText value="#{gerenciamentoPublicacoesMB.publicacao.autores}" />
+			<h:outputText value="Telefone: " />
+			<p:inputText value="#{gerenciamentoPublicacoesMB.publicacao.localPublicacao}" />
+
+			<p:commandButton value="Cadastrar!"
+				action="#{gerenciamentoPublicacoesMB.cadastrar}"
+				update=":form:tabelaPub :form:messages" />
+		</p:panelGrid>
+		<p:growl id="messages" />
+
+		<p:dataTable editable="true" id="tabelaPub"
+			value="#{gerenciamentoPublicacoesMB.publicacoes}" var="pub">
+			<p:ajax event="rowEdit" listener="#{gerenciamentoPublicacoesMB.onEdit}"
+				update=":form:tabelaPub :form:messages" />
+
+			<p:column headerText="ID" style="width:5%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.id}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.id}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Nome" style="width:30%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.titulo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.titulo}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Idade" style="width:5%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.autores}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.autores}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Profissão" style="width:30%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.titulo}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.titulo}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Telefone" style="width:25%">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{pub.localPublicacao}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{pub.localPublicacao}" style="width:100%" />
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column>
+				<p:commandButton icon="ui-icon-close"
+					update=":form:tabelaPub :form:messages"
+					action="#{gerenciamentoPublicacoesMB.excluir}">
+					<f:setPropertyActionListener
+						target="#{gerenciamentoPublicacoesMB.publicacao}" value="#{publicacao}" />
+				</p:commandButton>
+			</p:column>
+
+			<p:column style="width:5%">
+				<p:rowEditor />
+			</p:column>
+		</p:dataTable>
+
+		<br />
+		<br />
+
+	</h:form>
+</h:body>
+</html>
