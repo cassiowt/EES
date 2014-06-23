@@ -24,7 +24,7 @@
 			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.subtitulo}" />
 
 			<h:outputText value="Autor: " />
-			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.autores}" />
+			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.autor}" />
 
 			<h:outputText value="Local: " />
 			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.localPublicacao}" />
@@ -122,10 +122,10 @@
 			<p:column headerText="Autor" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.autores}" />
+						<h:outputText value="#{pub.autor}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.autores}" style="width:100%" />
+						<p:inputText value="#{pub.autor}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -267,7 +267,7 @@
 					update=":form:tabelaPub :form:messages"
 					action="#{gerenciamentoMonografiasMB.excluir}">
 					<f:setPropertyActionListener
-						target="#{gerenciamentoMonografiasMB.monografia}" value="#{monografia}" />
+						target="#{gerenciamentoMonografiasMB.monografia}" value="#{pub}" />
 				</p:commandButton>
 			</p:column>
 

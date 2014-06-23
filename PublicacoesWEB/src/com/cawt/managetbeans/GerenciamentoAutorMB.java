@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -14,12 +14,10 @@ import org.primefaces.event.RowEditEvent;
 
 import com.cawt.ejbs.AutorLocal;
 import com.cawt.entities.Autor;
-
  
 @Named
-@SessionScoped
+@RequestScoped
 public class GerenciamentoAutorMB implements Serializable {
-
 	private static final long serialVersionUID = 6381235301296269268L;
 
 	@Inject
@@ -58,10 +56,11 @@ public class GerenciamentoAutorMB implements Serializable {
  
     public void excluir() {
         try {
-            bean.remove(autor);
+           System.out.println("PPPP  --- >>"+ autor.getId());
+        	bean.remove(autor);
             autores = (List<Autor>) bean.findAll();
         } catch (Exception e) {
-            addMessage(e.getMessage());
+            addMessage("AQUI " + e.getMessage());
         }
     }
  

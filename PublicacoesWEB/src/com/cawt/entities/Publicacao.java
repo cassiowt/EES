@@ -1,9 +1,7 @@
 package com.cawt.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,8 +15,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,11 +39,20 @@ public class Publicacao implements Serializable {
 
 	private String localPublicacao;
 	
-	@OneToOne	(mappedBy="publicacao", cascade={CascadeType.PERSIST}, fetch=FetchType.EAGER)  
-	private List<Autor> autores;
+	@ManyToOne	(cascade={CascadeType.PERSIST}, fetch=FetchType.EAGER)  
+	@JoinColumn(name="PUBLICACAO_ID") 
+	private Autor autor;
 
 	@Enumerated(EnumType.STRING)
 	private Paper paper;
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
 
 	public Publicacao() {
 		// TODO Auto-generated constructor stub
@@ -81,13 +86,6 @@ public class Publicacao implements Serializable {
 		return paper;
 	}
 
-	public List<Autor> getAutores() {
-		return autores;
-	}
-
-	public void setAutores(List<Autor> autores) {
-		this.autores = autores;
-	}
 
 	public void setPaper(Paper paper) {
 		this.paper = paper;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -17,7 +17,7 @@ import com.cawt.entities.Monografia;
 
  
 @Named
-@SessionScoped
+@RequestScoped
 public class GerenciamentoMonografiasMB implements Serializable {
     private static final long serialVersionUID = 1880935315548336037L;
  

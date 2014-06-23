@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import com.cawt.ejbs.AutorLocal;
 import com.cawt.dao.AutorDAO;
 import com.cawt.entities.Autor;
 
@@ -27,11 +28,11 @@ public class AutorBean implements Serializable, AutorLocal {
     }
  
     public void remove(Autor e) {
-        if (e.getId() == 0 || e.getId() == null) {
-            throw new IllegalArgumentException(
+        System.out.println("PASSEI -- " );
+    	if (e.getId() == 0 || e.getId() == null) {
+    		throw new IllegalArgumentException(
                     "Campo id não pode ser nulo ou vazio");
         }
- 
         dao.removeById(e.getId());
     }
  

@@ -22,7 +22,7 @@
 			<h:outputText value="Sub Titulo " />
 			<p:inputText value="#{gerenciamentoPublicacoesMB.publicacao.subtitulo}" />
 			<h:outputText value="Autor: " />
-			<p:inputText value="#{gerenciamentoPublicacoesMB.publicacao.autores}" />
+			<p:inputText value="#{gerenciamentoPublicacoesMB.publicacao.autor}" />
 			<h:outputText value="Telefone: " />
 			<p:inputText value="#{gerenciamentoPublicacoesMB.publicacao.localPublicacao}" />
 
@@ -62,10 +62,10 @@
 			<p:column headerText="Idade" style="width:5%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.autores}" />
+						<h:outputText value="#{pub.autor}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.autores}" style="width:100%" />
+						<p:inputText value="#{pub.autor}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
