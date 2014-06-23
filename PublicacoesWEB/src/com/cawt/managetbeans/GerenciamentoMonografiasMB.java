@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.RowEditEvent;
 
 import com.cawt.ejbs.MonografiaLocal;
@@ -38,6 +39,7 @@ public class GerenciamentoMonografiasMB implements Serializable {
         try {
             bean.persist(monografia);
             monografias = (List<Monografia>) bean.findAll();
+            addMessage("Monografia " + monografia.getTitulo()+ " Cadastrado!" + monografia.getAutor());
         } catch (Exception e) {
             addMessage(e.getMessage());
         }
@@ -89,6 +91,10 @@ public class GerenciamentoMonografiasMB implements Serializable {
  
     public void setMonografias(List<Monografia> monografias) {
         this.monografias = monografias;
+    }
+    
+    public void viewLogin() {
+        RequestContext.getCurrentInstance().openDialog("login");
     }
 
 }

@@ -23,9 +23,21 @@
 			<h:outputText value="Sub Titulo " />
 			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.subtitulo}" />
 
-			<h:outputText value="Autor: " />
-			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.autor}" />
-
+			<p:row>
+				<p:lightBox iframe="true" id="lighbox" onHide="remote()" >
+					<h:outputLink value="autor.xhtml" title="Cadastro Autores">
+						<h:outputText value="Autor: " />
+					</h:outputLink>
+				</p:lightBox>
+				<p:remoteCommand name="remote" update=":form:selecaoAutor"/>  
+			</p:row>	
+				
+			<p:selectOneMenu id="selecaoAutor" value="#{gerenciamentoMonografiasMB.monografia.autor}" >  
+                <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+                <f:selectItems   value="#{gerenciamentoAutorMB.autores}" var="autor"  itemLabel="#{autor.nome}" itemValue="#{autor}" />
+                <f:converter converterId="com.cawt.dao.ObjectConverter" />
+            </p:selectOneMenu>
+	
 			<h:outputText value="Local: " />
 			<p:inputText value="#{gerenciamentoMonografiasMB.monografia.localPublicacao}" />
 
@@ -82,28 +94,28 @@
 		<p:growl id="messages" />
 
 		<p:dataTable editable="true" id="tabelaPub"
-			value="#{gerenciamentoMonografiasMB.monografias}" var="pub">
+			value="#{gerenciamentoMonografiasMB.monografias}" var="mono">
 			<p:ajax event="rowEdit" listener="#{gerenciamentoMonografiasMB.onEdit}"
 				update=":form:tabelaPub :form:messages" />
 
 			<p:column headerText="ID" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.id}" />
+						<h:outputText value="#{mono.id}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.id}" style="width:100%" />
+						<p:inputText value="#{mono.id}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
 
-			<p:column headerText="Titulo" style="width:25%">
+			<p:column headerText="Titulo" style="width:25%" sortBy="titulo">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.titulo}" />
+						<h:outputText value="#{mono.titulo}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.titulo}" style="width:100%" />
+						<p:inputText value="#{mono.titulo}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -111,10 +123,10 @@
 			<p:column headerText="SubTitulo" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.subtitulo}" />
+						<h:outputText value="#{mono.subtitulo}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.subtitulo}" style="width:100%" />
+						<p:inputText value="#{mono.subtitulo}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -122,10 +134,10 @@
 			<p:column headerText="Autor" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.autor}" />
+						<h:outputText value="#{mono.autor}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.autor}" style="width:100%" />
+						<p:inputText value="#{mono.autor}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -133,10 +145,10 @@
 			<p:column headerText="Local" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.localPublicacao}" />
+						<h:outputText value="#{mono.localPublicacao}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.localPublicacao}" style="width:100%" />
+						<p:inputText value="#{mono.localPublicacao}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -144,10 +156,10 @@
 			<p:column headerText="Data" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.data}" />
+						<h:outputText value="#{mono.data}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.data}" style="width:100%" />
+						<p:inputText value="#{mono.data}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -155,10 +167,10 @@
 			<p:column headerText="Descrição" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.descricaoFisica}" />
+						<h:outputText value="#{mono.descricaoFisica}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.descricaoFisica}" style="width:100%" />
+						<p:inputText value="#{mono.descricaoFisica}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>
@@ -166,10 +178,10 @@
 			<p:column headerText="Dimensão" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.dimensao}" />
+						<h:outputText value="#{mono.dimensao}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.dimensao}" style="width:100%" />
+						<p:inputText value="#{mono.dimensao}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>			
@@ -177,10 +189,10 @@
 			<p:column headerText="Edição" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.edicao}" />
+						<h:outputText value="#{mono.edicao}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.edicao}" style="width:100%" />
+						<p:inputText value="#{mono.edicao}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>				
@@ -188,10 +200,10 @@
 			<p:column headerText="Editora" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.editora}" />
+						<h:outputText value="#{mono.editora}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.editora}" style="width:100%" />
+						<p:inputText value="#{mono.editora}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>	
@@ -199,10 +211,10 @@
 			<p:column headerText="Ilustração" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.ilustracao}" />
+						<h:outputText value="#{mono.ilustracao}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.ilustracao}" style="width:100%" />
+						<p:inputText value="#{mono.ilustracao}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>				
@@ -210,10 +222,10 @@
 			<p:column headerText="ISBN" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.isbn}" />
+						<h:outputText value="#{mono.isbn}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.isbn}" style="width:100%" />
+						<p:inputText value="#{mono.isbn}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>		
@@ -221,10 +233,10 @@
 			<p:column headerText="Notas Especiais" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.notasEspeciais}" />
+						<h:outputText value="#{mono.notasEspeciais}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.notasEspeciais}" style="width:100%" />
+						<p:inputText value="#{mono.notasEspeciais}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>		
@@ -232,10 +244,10 @@
 			<p:column headerText="Paper" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.paper}" />
+						<h:outputText value="#{mono.paper}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.paper}" style="width:100%" />
+						<p:inputText value="#{mono.paper}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>	
@@ -243,10 +255,10 @@
 			<p:column headerText="Serie" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.serie}" />
+						<h:outputText value="#{mono.serie}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.serie}" style="width:100%" />
+						<p:inputText value="#{mono.serie}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>	
@@ -254,10 +266,10 @@
 			<p:column headerText="Tipo Monografia" style="width:25%">
 				<p:cellEditor>
 					<f:facet name="output">
-						<h:outputText value="#{pub.tiposMonografias}" />
+						<h:outputText value="#{mono.tiposMonografias}" />
 					</f:facet>
 					<f:facet name="input">
-						<p:inputText value="#{pub.tiposMonografias}" style="width:100%" />
+						<p:inputText value="#{mono.tiposMonografias}" style="width:100%" />
 					</f:facet>
 				</p:cellEditor>
 			</p:column>	
@@ -267,7 +279,7 @@
 					update=":form:tabelaPub :form:messages"
 					action="#{gerenciamentoMonografiasMB.excluir}">
 					<f:setPropertyActionListener
-						target="#{gerenciamentoMonografiasMB.monografia}" value="#{pub}" />
+						target="#{gerenciamentoMonografiasMB.monografia}" value="#{mono}" />
 				</p:commandButton>
 			</p:column>
 

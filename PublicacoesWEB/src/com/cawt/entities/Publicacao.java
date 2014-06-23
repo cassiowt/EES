@@ -38,9 +38,9 @@ public class Publicacao implements Serializable {
 	private Date data;
 
 	private String localPublicacao;
-	
-	@ManyToOne	(cascade={CascadeType.PERSIST}, fetch=FetchType.EAGER)  
-	@JoinColumn(name="PUBLICACAO_ID") 
+	//cascade={CascadeType.PERSIST}
+	@ManyToOne	(fetch=FetchType.EAGER)  
+	@JoinColumn(name="AUTOR_ID") 
 	private Autor autor;
 
 	@Enumerated(EnumType.STRING)

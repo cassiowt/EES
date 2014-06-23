@@ -12,7 +12,7 @@
 <h:body>
 	<h:form id="form">
 
-		<p:panelGrid columns="6">
+		<p:panelGrid columns="2">
 			<f:facet name="header">  
                 Cadastrar novo Autor
              </f:facet>
@@ -24,7 +24,7 @@
 			<h:outputText value="Instituição " />
 			<p:inputText value="#{gerenciamentoAutorMB.autor.instituicao}" />
 
-			<p:commandButton value="Cadastrar!"
+			<p:commandButton value="Cadastrar!" 
 				action="#{gerenciamentoAutorMB.cadastrar}"
 				update=":form:tabelaPub :form:messages" />
 		</p:panelGrid>
