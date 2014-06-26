@@ -39,6 +39,7 @@ public class Publicacao implements Serializable {
 
 	private String localPublicacao;
 	//cascade={CascadeType.PERSIST}
+	
 	@ManyToOne	(fetch=FetchType.EAGER)  
 	@JoinColumn(name="AUTOR_ID") 
 	private Autor autor;
@@ -102,6 +103,12 @@ public class Publicacao implements Serializable {
 
 	public void setLocalPublicacao(String localPublicacao) {
 		this.localPublicacao = localPublicacao;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
 	}
 
 }

@@ -2,10 +2,10 @@ package com.cawt.managetbeans;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.inject.Named;
 
-@Named
+@ManagedBean
 @RequestScoped
 public class AcessoUsuario {
 
@@ -13,7 +13,7 @@ public class AcessoUsuario {
 	private String senha;
 	private boolean cadastroAtivo;
 	private boolean apresentaLogin;
-	
+	private boolean ativaLogin;
 
 	public String getNomeUsuario() {
 		return nomeUsuario;
@@ -35,13 +35,12 @@ public class AcessoUsuario {
 		return apresentaLogin;
 	}
 
-	public void ativaLogin() {
+	public void setAtivaLogin() {
 		this.apresentaLogin = true;
-		System.out.println("ATIVOU" +  this.apresentaLogin );
+		System.out.println("ATIVOU" + this.apresentaLogin);
 		addMessage("Apresenta login " + this.apresentaLogin + " !");
 	}
 
-	
 	public boolean isCadastroAtivo() {
 		return cadastroAtivo;
 	}
@@ -50,19 +49,22 @@ public class AcessoUsuario {
 		this.cadastroAtivo = cadastroAtivo;
 	}
 
-	public void valida() {
+	public boolean isAtivaLogin() {
+		return ativaLogin;
+	}
 
-		if (this.getNomeUsuario().equals("admin")
-				&& this.getSenha().equals("123456")) {
+	public void mostraLogin() {
+		this.apresentaLogin = true;
+		System.out.println("Apresenta login " + this.apresentaLogin);
+	}
 
-			addMessage("Usuario " + this.getNomeUsuario()+ " Autenticado!");
+	public void mostraCadastro() {
+		if (this.getNomeUsuario().equals("admin") && this.getSenha().equals("123456")) {
 			this.cadastroAtivo = true;
-			System.out.println("Sucesso " + cadastroAtivo );
-			
+			System.out.println("Sucesso " + cadastroAtivo);
 		} else {
-			addMessage("Usuario " + this.getNomeUsuario()+ " NÃO Autenticado!");
 			this.cadastroAtivo = false;
-			System.out.println("ERRO " + cadastroAtivo );
+			System.out.println("ERRO " + cadastroAtivo);
 		}
 	}
 
@@ -70,6 +72,4 @@ public class AcessoUsuario {
 		FacesMessage msg = new FacesMessage(message);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-
-
 }

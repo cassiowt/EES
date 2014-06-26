@@ -2,9 +2,11 @@ package com.cawt.ejbs;
 
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.ejb.Stateless;
 //import javax.ejb.TransactionManagement;
 import javax.inject.Inject;
+
 import com.cawt.dao.MonografiaDAO;
 import com.cawt.entities.Monografia;
 
@@ -65,6 +67,7 @@ public class MonografiaBean implements Serializable, MonografiaLocal {
                     "Campo idade não pode ser nulo ou vazio");
         }*/
     }
- 
+    
+    
     
 }

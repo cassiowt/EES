@@ -40,6 +40,7 @@ public class GerenciamentoMonografiasMB implements Serializable {
             bean.persist(monografia);
             monografias = (List<Monografia>) bean.findAll();
             addMessage("Monografia " + monografia.getTitulo()+ " Cadastrado!" + monografia.getAutor());
+            System.out.println(monografia.toString());
         } catch (Exception e) {
             addMessage(e.getMessage());
         }
@@ -92,9 +93,4 @@ public class GerenciamentoMonografiasMB implements Serializable {
     public void setMonografias(List<Monografia> monografias) {
         this.monografias = monografias;
     }
-    
-    public void viewLogin() {
-        RequestContext.getCurrentInstance().openDialog("login");
-    }
-
 }

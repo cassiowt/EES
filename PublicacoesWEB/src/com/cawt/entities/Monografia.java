@@ -1,6 +1,7 @@
 package com.cawt.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,23 +9,23 @@ import javax.persistence.Enumerated;
 
 @Entity
 public class Monografia extends Publicacao implements Serializable {
- 
+
 	private static final long serialVersionUID = -4860299879411454715L;
 
 	private String editora;
-	 
+
 	private String descricaoFisica;
-	 
+
 	private String ilustracao;
-	 
+
 	private String dimensao;
-	 
+
 	private String edicao;
-	 
+
 	private String serie;
-	 
+
 	private String notasEspeciais;
-	 
+
 	private String isbn;
 
 	@Enumerated(EnumType.STRING)
@@ -33,7 +34,7 @@ public class Monografia extends Publicacao implements Serializable {
 	public Monografia() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public String getEditora() {
 		return editora;
 	}
@@ -105,7 +106,35 @@ public class Monografia extends Publicacao implements Serializable {
 	public void setTiposMonografias(TiposMonografias tiposMonografias) {
 		this.tiposMonografias = tiposMonografias;
 	}
-	
-	
+
+	@SuppressWarnings("deprecation")
+	public String toString() {
+
+		Date data = this.getData();
+
+		String referencia = this.getAutor().getNome();
+
+		referencia += ", " + this.getTitulo();
+		if (this.getEdicao() != "") {
+			referencia += ", " + this.getEdicao();
+		}
+		referencia += ", " + this.getLocalPublicacao();
+		referencia += ", " + this.getEditora();
+		referencia += ", " + String.valueOf(data.getYear());
+		if (this.descricaoFisica != "") {
+			referencia += ", " + this.descricaoFisica;
+		}
+		if (this.serie != "") {
+			referencia += ", " + this.serie;
+		}
+		if (this.notasEspeciais != "") {
+			referencia += ", " + this.notasEspeciais;
+		}
+		if (this.getIsbn() != "") {
+			referencia += ", " + this.getIsbn();
+		}
+
+		return referencia;
+	}
+
 }
- 

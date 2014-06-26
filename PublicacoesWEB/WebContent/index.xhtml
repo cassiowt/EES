@@ -4,34 +4,27 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
 <h:head>
 	<title>CAWT - Gerenciamento de Publicações</title>
 </h:head>
-
 <h:body>
 	<h:form id="form" prependId="false">
 
-		<p:commandLink actionListener="#{acessoUsuario.ativaLogin}" process="@all" update="login">
-			<h:outputText value="Login" style="display:block; text-align:right" />
-		</p:commandLink>
-
-		<p:fieldset legend="Publicações" style="margin-bottom:20px">
-			
-			<p:panelGrid columns="1" id="login"
-				rendered="#{acessoUsuario.apresentaLogin }">
+		  <p:panel id="login" header="Login" toggleable="true" collapsed="true"  toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="10">
 				<h:outputText value="Usuario " />
 				<p:inputText value="#{acessoUsuario.nomeUsuario}" />
 				<h:outputText value="Senha " />
 				<p:password value="#{acessoUsuario.senha}" />
-				<p:row>
-					<p:commandButton action="#{acessoUsuario.valida}" value="Acessar"
-						icon="ui-icon-check" update=":form" />
-					<p:commandButton type="reset" value="Cancelar" />
-				</p:row>
-			</p:panelGrid>
-			
-			<p:panelGrid columns="6" rendered="#{acessoUsuario.cadastroAtivo}">
+				<p:commandButton action="#{acessoUsuario.mostraCadastro}"
+					value="Login" icon="ui-icon-check" update="form" />
+				<p:commandButton type="reset" value="Cancelar" />
+			</h:panelGrid>
+		</p:panel>
+
+		<p:fieldset legend="Publicações" style="margin-bottom:20px">
+			<p:panelGrid columns="6" rendered="#{acessoUsuario.cadastroAtivo}"
+				id="painel">
 				<f:facet name="header">  
                 Cadastrar nova Publicação
              </f:facet>
@@ -113,7 +106,7 @@
 					value="#{gerenciamentoMonografiasMB.monografia.tiposMonografias}">
 					<f:selectItem itemLabel="Selecione" itemValue=""
 						noSelectionOption="true" />
-					<f:selectItem itemLabel="DISSERTAÇÕES" itemValue="DISSERTAÇÕES" />
+					<f:selectItem itemLabel="DISSERTAÇÕES" itemValue="DISSERTACOES" />
 					<f:selectItem itemLabel="TESES" itemValue="TESES" />
 					<f:selectItem itemLabel="FOLHETOS" itemValue="FOLHETOS" />
 					<f:selectItem itemLabel="SEPARATAS" itemValue="SEPARATAS" />
@@ -123,10 +116,7 @@
 				<p:commandButton value="Cadastrar!"
 					action="#{gerenciamentoMonografiasMB.cadastrar}"
 					update=":form:tabelaPub :form:messages" />
-
 			</p:panelGrid>
-
-
 
 			<p:growl id="messages" />
 
@@ -147,7 +137,7 @@
 					</p:cellEditor>
 				</p:column>
 
-				<p:column headerText="Titulo" style="width:25%" sortBy="titulo">
+				<p:column headerText="Titulo" style="width:25%" sortBy="#{mono.titulo}">
 					<p:cellEditor>
 						<f:facet name="output">
 							<h:outputText value="#{mono.titulo}" />
@@ -315,16 +305,18 @@
 				<p:column>
 					<p:commandButton icon="ui-icon-close"
 						update=":form:tabelaPub :form:messages"
-						action="#{gerenciamentoMonografiasMB.excluir}">
-						<f:setPropertyActionListener
-							target="#{gerenciamentoMonografiasMB.monografia}" value="#{mono}" />
+						action="#{gerenciamentoMonografiasMB.excluir}"
+						rendered="#{acessoUsuario.cadastroAtivo}">
+						<f:setPropertyActionListener target="#{gerenciamentoMonografiasMB.monografia}" value="#{mono}" />
 					</p:commandButton>
 				</p:column>
 
-				<p:column style="width:5%">
+				<p:column style="width:5%" rendered="#{acessoUsuario.cadastroAtivo}">
 					<p:rowEditor />
 				</p:column>
 			</p:dataTable>
+
+
 
 			<br />
 			<br />

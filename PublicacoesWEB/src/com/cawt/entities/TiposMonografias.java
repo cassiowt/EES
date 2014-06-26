@@ -8,7 +8,7 @@ package com.cawt.entities;
  */
 public enum TiposMonografias {
  
-	DISSERTAÇÕES,
+	DISSERTACOES,
 	 
 	TESES,
 	 
